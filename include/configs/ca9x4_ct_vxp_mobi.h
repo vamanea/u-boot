@@ -123,14 +123,15 @@
 /* Basic environment settings */
 #define CONFIG_BOOTCOMMAND		"run bootflash;"
 #define CONFIG_EXTRA_ENV_SETTINGS \
+		"mobicore_flash=0x40000000\0" \
 		"mobicore_addr=0x48000000\0" \
+		"maxmobicore=0x80000\0" \
 		"loadaddr=0x80008000\0" \
 		"ramdisk_addr=0x63000000\0" \
 		"kernel_addr=0x62000000\0" \
-		"maxramdisk=0x1800000\0" \
 		"pxefile_addr_r=0x88000000\0" \
 		"console=ttyAMA0,115200n8\0" \
-		"bootmobicore=fatload mmc 0:1 ${mobicore_addr} mobicore.img\0" \
+		"bootmobicore=cp ${mobicore_flash} ${mobicore_addr} ${maxmobicore}\0" \
 		"dram=256M\0" \
 		"root=/dev/sda1 rw\0" \
 		"flashargs=setenv bootargs root=${root} console=${console} " \
