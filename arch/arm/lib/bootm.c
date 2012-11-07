@@ -353,12 +353,12 @@ static void boot_jump_linux(bootm_headers_t *images)
 		[nsacr]"=r" (nsacr));
 	printf("Running with NSACR 0x%lx\n", nsacr);
 	if (nsacr == 0) {
-		void (*mobicore_entry)(u32 bootmode, u32 nwdaddr);
+		void (*mobicore_entry)(u32 bootmode, u32 magic, u32 nwdaddr);
 		s = getenv("mobicore_addr");
 		if (run_command(getenv("bootmobicore"), 0) >= 0 && s) {
 				strict_strtoul(s, 16, &mobicore_entry);
 				printf("Starting mobicore at 0x%lx from environment\n", mobicore_entry);
-				mobicore_entry(0, CONFIG_SYS_TEXT_BASE);
+				mobicore_entry(0, 0xDEAD100C, CONFIG_SYS_TEXT_BASE);
 		}
 	}
 #endif
